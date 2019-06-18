@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tickets;
 use Illuminate\Http\Request;
 
 class TicketsController extends Controller
@@ -19,7 +20,8 @@ class TicketsController extends Controller
     public function index()
     {
 
-        echo('jsds');
+        $tickets=Tickets::orderBy('id','DESC')->paginate(10);
+        return view('tickets.index',compact('tickets'));
       }
 
     /**
@@ -29,7 +31,7 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        //
+        return view('tickets.create'); 
     }
 
     /**
@@ -40,8 +42,9 @@ class TicketsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+
+        Tickets::create($request->all());
+        return redirect()->route('tickets.index');    }
 
     /**
      * Display the specified resource.

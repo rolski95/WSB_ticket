@@ -16,7 +16,7 @@ class Tickets extends Migration
             Schema::create('tickets', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('title');
-                $table->string('content');
+                $table->longText('content');
                 $table->timestamps();
             });
     }
